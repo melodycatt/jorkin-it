@@ -3,19 +3,19 @@ i aint never rep a set baby, i aint do no wrong. i could clean up good for you, 
 
 TODO LIST
 
-[ ] - boss one - eddy
-[ ] - boss two - aedan
-[ ] - items - eddy
-[ ] - ubiquitous health manager - eddy
-[ ] - corpses
-[ ] - inventory
-[ ] - fix sword
-[ ] - ui
-[ ] - mana
-[ ] - bestiary
-[ ] - camera
-[ ] - sword infusions
-[ ] - npcs
-[ ] - equipment (hollow knight charms)
+- [ ] - boss one - eddy
+- [ ] - boss two - aedan
+- [ ] - items - eddy
+- [ ] - ubiquitous health manager - eddy
+- [ ] - corpses
+- [ ] - inventory
+- [ ] - fix sword
+- [ ] - ui
+- [ ] - mana
+- [ ] - bestiary
+- [ ] - camera
+- [ ] - sword infusions
+- [ ] - npcs
+- [ ] - equipment (hollow knight charms)
 
 idk what else

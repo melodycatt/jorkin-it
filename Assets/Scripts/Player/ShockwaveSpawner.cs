@@ -7,6 +7,9 @@ using System.Collections;
 //i edited it a bit tho its not all chatgpt
 public class ShockwaveSpawner : MonoBehaviour
 {
+    public AttackManager attackManager;
+    public Transform Player;
+
     public GameObject shockwavePrefab; // Assign the Shockwave prefab in the Inspector
     public float spawnInterval = 0.3f; // Time between each pair of shockwave spawns
     public float lifetime = 1.0f; // Time before shockwave despawns
@@ -19,6 +22,8 @@ public class ShockwaveSpawner : MonoBehaviour
 
     void Start()
     {
+        Player = transform.parent.Find("Player");
+        attackManager = Player.GetComponent<AttackManager>();
         shockwavePrefab = Resources.Load<GameObject>("Prefabs/Player/Shockwave");
     }
 

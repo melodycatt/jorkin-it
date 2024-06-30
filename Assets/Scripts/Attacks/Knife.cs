@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEditor.ShaderGraph.Internal;
 
 public class Knife : MonoBehaviour {
+    public AttackManager attackManager;
 
     //values for the smooth movement of knives
     public Vector3 targetPosition;
@@ -136,7 +137,7 @@ public class Knife : MonoBehaviour {
         int nhits = collider.OverlapCollider(filter, hits);
         foreach (Collider2D hit in hits) {
             //TODO: make the enemies start the coroutine, not the knife (because when the knife hits it destroys itself, ending the coroutine early)
-            StartCoroutine(hit.GetComponent<Enemy>().Hurt());
+            attackManager.Attack(hit.GetComponent<HealthManager>());
         }
         if (nhits > 0) {
             Destroy(gameObject);

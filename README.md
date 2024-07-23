@@ -6,7 +6,8 @@ TODO LIST
 - [ ] - boss one - eddy
 - [ ] - boss two - aedan
 - [ ] - items - eddy
-- [ ] - ubiquitous health manager - eddy
+- [x] - ubiquitous health manager - eddy
+- [ ] - statuses - eddy
 - [ ] - corpses
 - [ ] - inventory
 - [ ] - fix sword

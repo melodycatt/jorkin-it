@@ -13,4 +13,8 @@ public class AttackStatus : StatusEffect {
         on.attackManager.Effects = on.attackManager.Effects.Concat(stati).ToList();
         on.attackManager.Modifiers.Add(this); 
     }
+
+    public override StatusEffect Copy() {
+        return new AttackStatus(healthManager);
+    }
 }

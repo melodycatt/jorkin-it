@@ -10,6 +10,10 @@ public class StatusTicker : TickingEffect {
         this.status = status;
     }
 
+    public override StatusEffect Copy() {
+        return new StatusTicker(healthManager, tickDelay, status);
+    }
+
     protected override IEnumerator Ticker() {
         while (true) {
             healthManager.statuses.Add(status);

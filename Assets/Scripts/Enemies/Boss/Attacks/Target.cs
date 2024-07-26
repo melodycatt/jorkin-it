@@ -64,14 +64,15 @@ public class Target : MonoBehaviour {
 
     IEnumerator Attack() {
         //freeze player physics, hurt (via the detached method for no cutoff) every .5 secs, unfreeze and die
+        HealthManager hMngr = Player.GetComponent<HealthManager>();
         PlayerMovement pMov = Player.GetComponent<PlayerMovement>();
         pMov.rb.simulated = false;
         yield return new WaitForSeconds(0.5f);
-        pMov.DetatchedHurt(0.5f);
+        hMngr.Hurt(0.5f);
         yield return new WaitForSeconds(0.5f);
-        pMov.DetatchedHurt(0.5f);
+        hMngr.Hurt(0.5f);
         yield return new WaitForSeconds(0.5f);
-        pMov.DetatchedHurt(1);
+        hMngr.Hurt(1);
         pMov.rb.simulated = true;
         Destroy(gameObject);
         print("AAA");

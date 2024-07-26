@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
 public abstract class TickingEffect : StatusEffect {
     public float tickDelay;
     public bool tickDown;
@@ -25,8 +27,21 @@ public abstract class TickingEffect : StatusEffect {
     protected Coroutine ticker;
 
     public TickingEffect(HealthManager on, float tickDelay): base(on) {
-        ticker = on.StartCoroutine(Ticker());
+        if (on != null) {
+            MonoBehaviour.print("uh constructor");
+            ticker = on.StartCoroutine(Ticker());
+        }
         this.tickDelay = tickDelay;
+    }
+
+    public override StatusEffect SetManager(HealthManager on)
+    {
+        if (healthManager!= null) healthManager.StopCoroutine(ticker);
+        if (on != null) {
+            MonoBehaviour.print("uh method");
+            ticker = on.StartCoroutine(Ticker());
+        }
+        return base.SetManager(on);
     }
 
     protected abstract IEnumerator Ticker();

@@ -850,7 +850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1176230864
 Rigidbody2D:
   serializedVersion: 4
@@ -1274,6 +1274,7 @@ MonoBehaviour:
   _maxHealth: 0
   Health: 0
   Dead: 0
+  statuses: []
   didItWork: []
   attackManager: {fileID: 0}
 --- !u!1 &1790787497
@@ -1759,6 +1760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
+  Effects: []
 --- !u!114 &1939390750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1774,6 +1776,7 @@ MonoBehaviour:
   _maxHealth: 20
   Health: 20
   Dead: 0
+  statuses: []
   didItWork: []
   attackManager: {fileID: 1939390749}
 --- !u!1660057539 &9223372036854775807

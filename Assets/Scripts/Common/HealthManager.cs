@@ -16,24 +16,37 @@ public class HealthManager : MonoBehaviour {
     public List<Func<float, HealthManager, float>> OnHurtFunctions = new();
     public List<Func<float, HealthManager, float>> OnHealFunctions = new();
 
+    [SerializeField]
     public List<StatusEffect> statuses = new();
     public List<string> didItWork = new();
     public AttackManager attackManager;
 
+    public float genericIframes;
+    public float genericIframesLength = 0.45f;
+
     void Start() {
         Health = MaxHealth;
         attackManager = GetComponent<AttackManager>();
-        statuses.Add(HealthStatusBuilder.Statifier(this, new DamageTicker(this, 3, 1, false)));
+        Debug.Log("bb");
+        HealthStatusBuilder.Statifier(this, new DamageTicker(null, 3, 1, false));
+    }
+
+    void Update() {
+        if (genericIframes > 0) genericIframes -= Time.deltaTime;
+        if (genericIframes < 0) genericIframes = 0;
     }
 
     public void Hurt(float damage) {
-        foreach (Func<float, HealthManager, float> function in OnHurtFunctions) {
-            damage = function(damage, this);
+        if (genericIframes <= 0) {
+            foreach (Func<float, HealthManager, float> function in OnHurtFunctions) {
+                damage = function(damage, this);
+            }
+            if (damage < 100) {
+                print("'tis but a scratch!");
+            }
+            genericIframes = genericIframesLength;
+            _Hurt(damage);
         }
-        if (damage < 100) {
-            print("'tis but a scratch!");
-        }
-        _Hurt(damage);
     }
 
     public void Heal(float health) {

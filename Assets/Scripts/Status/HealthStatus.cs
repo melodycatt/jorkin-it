@@ -10,6 +10,8 @@ public class HealthStatus : StatusEffect {
     public int op;
     public List<StatusEffect> stati;
 
+    private Func<float, HealthManager, float> InvokeFunc;
+
     public enum Type {
         Hurt,
         Heal, 
@@ -19,6 +21,7 @@ public class HealthStatus : StatusEffect {
 
     public HealthStatus(HealthManager on, Type triggers, Func<float, HealthManager, float> Invoke): base(on) {
         type = triggers;
+        InvokeFunc = Invoke;
         if (triggers == Type.Hurt) {
             on.OnHurtFunctions.Add(Invoke);
         }
@@ -31,6 +34,9 @@ public class HealthStatus : StatusEffect {
         }
     }
 
+    public override StatusEffect Copy() {
+        return new HealthStatus(healthManager, type, InvokeFunc);
+    }
 
     public void Invoke(float damage) {
 
@@ -57,6 +63,7 @@ public static class HealthStatusBuilder {
         return new HealthStatus(on, HealthStatus.Type.Both, (float d, HealthManager on) => d + mod);
     }
     public static HealthStatus Statifier(HealthManager on, StatusEffect status) {
-        return new HealthStatus(on, HealthStatus.Type.Both, (float d, HealthManager on) => {on.statuses.Add(status); on.didItWork.Add("Yes!"); return d;});
+        Debug.Log("aaa");
+        return new HealthStatus(on, HealthStatus.Type.Both, (float d, HealthManager on) => {status.Copy().SetManager(on); on.didItWork.Add("Yes!"); return d;});
     }  
 }

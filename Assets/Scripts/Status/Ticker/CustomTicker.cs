@@ -10,6 +10,10 @@ public class CustomTicker : TickingEffect {
         this.tick = tick;
     }
 
+    public override StatusEffect Copy() {
+        return new CustomTicker(healthManager, tickDelay, tick);
+    }
+
     protected override IEnumerator Ticker() {
         while (true) {
             tick(healthManager);

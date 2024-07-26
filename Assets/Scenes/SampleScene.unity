@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b34b2885c0fe41f58fb89b9391a5ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackManager: {fileID: 0}
   cooldown: 0
   cooldownLength: 0.4
   Slash: {fileID: 0}
@@ -435,6 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a61dfa95e91646d58c4ad74a866a4cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackManager: {fileID: 0}
   knives: []
   shootingKnives: []
   Knife: {fileID: 0}
@@ -848,7 +850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1176230864
 Rigidbody2D:
   serializedVersion: 4
@@ -1137,6 +1139,7 @@ GameObject:
   - component: {fileID: 1521822226}
   - component: {fileID: 1521822225}
   - component: {fileID: 1521822224}
+  - component: {fileID: 1521822227}
   m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
@@ -1256,6 +1259,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1521822227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521822223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de83cce6e84f422fa5d6550d1c023f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 0
+  Health: 0
+  Dead: 0
+  statuses: []
+  didItWork: []
+  attackManager: {fileID: 0}
 --- !u!1 &1790787497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,6 +1539,8 @@ GameObject:
   - component: {fileID: 1939390744}
   - component: {fileID: 1939390743}
   - component: {fileID: 1939390748}
+  - component: {fileID: 1939390750}
+  - component: {fileID: 1939390749}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1538,6 +1561,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sprite: {fileID: 0}
+  healthManager: {fileID: 0}
+  attackManager: {fileID: 0}
   Speed: 8
   JumpSpeed: 14
   rb: {fileID: 0}
@@ -1711,6 +1736,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc6aed4300e6e47fd8e6386e5c5d606e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackManager: {fileID: 0}
+  Player: {fileID: 0}
   shockwavePrefab: {fileID: 0}
   spawnInterval: 0.15
   lifetime: 0.8
@@ -1720,6 +1747,38 @@ MonoBehaviour:
   verticalOffset: 3
   riseSpeed: 1
   shockwavePosition: {x: 0, y: 0, z: 0}
+--- !u!114 &1939390749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939390742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca33dfbb894d4311a9c6760231fb9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 1
+  Effects: []
+--- !u!114 &1939390750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939390742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de83cce6e84f422fa5d6550d1c023f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 20
+  Health: 20
+  Dead: 0
+  statuses: []
+  didItWork: []
+  attackManager: {fileID: 1939390749}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

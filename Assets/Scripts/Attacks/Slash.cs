@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Slash : MonoBehaviour
 {
+    public AttackManager attackManager;
     //references - see Knife.cs (it has the same references)
     public new Collider2D collider;
     public LayerMask EnemyLayer;
@@ -34,7 +35,7 @@ public class Slash : MonoBehaviour
         List<Collider2D> hits = new();
         int nhits = collider.OverlapCollider(filter, hits);
         foreach (Collider2D hit in hits) {
-            StartCoroutine(hit.GetComponent<Enemy>().Hurt());
+            attackManager.Attack(hit.GetComponent<HealthManager>());
         }
         if (nhits > 0 && !hit) {
             //recoil. this doesnt work, and i dont know how to make it work

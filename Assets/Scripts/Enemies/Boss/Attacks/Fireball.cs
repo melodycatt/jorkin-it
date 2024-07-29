@@ -58,7 +58,7 @@ class Fireball : MonoBehaviour {
         if(GetComponent<Collider2D>().OverlapCollider(filter, results) > 0) {
             //this is the end goal of the TODO in knife.cs
             //this insures the the hurt coroutine isn't cut off
-            Player.GetComponent<PlayerMovement>().DetatchedHurt(1);
+            Player.GetComponent<HealthManager>().Hurt(1);
         }
     }
 

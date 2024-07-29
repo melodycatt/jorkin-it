@@ -6,6 +6,7 @@ using System.Linq;
 using Unity.VisualScripting;
 
 public class KnifeController : MonoBehaviour {
+    public AttackManager attackManager;
     //list of knives, and knives that are currently shooting
     public List<Knife> knives = new();
     public List<Knife> shootingKnives = new();
@@ -34,6 +35,7 @@ public class KnifeController : MonoBehaviour {
 
     void Start() {
         Player = transform.parent.Find("Player");
+        attackManager = Player.GetComponent<AttackManager>();
         Knife = Resources.Load<GameObject>("Prefabs/Player/Knife");
     }
 
@@ -67,9 +69,11 @@ public class KnifeController : MonoBehaviour {
         //spawn multiple times with delay while spawn key is down
         for(int i = 0; i < 5 && Input.GetKey(KnifeKeybinds.Spawn) && knives.Count < 5; i++) {
             GameObject tempKnife = Instantiate(Knife);
+            Knife tempKnifeKnife = tempKnife.GetComponent<Knife>();
             tempKnife.transform.parent = transform;//.parent.Find("Knife Holder"); // ignore that
-            knives.Add(tempKnife.GetComponent<Knife>());
-            tempKnife.GetComponent<Knife>().InstantArrange(knives.Count - 1, knives.Count);
+            knives.Add(tempKnifeKnife);
+            tempKnifeKnife.InstantArrange(knives.Count - 1, knives.Count);
+            tempKnifeKnife.attackManager = attackManager;
             Arrange();
             yield return new WaitForSeconds(0.25f);
         }

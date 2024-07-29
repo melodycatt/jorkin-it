@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 {
     //do i really have to comment all these fields? figure it out 
     public SpriteRenderer Sprite;
+    public HealthManager healthManager;
+    public AttackManager attackManager;
 
     public float Speed;
     public float JumpSpeed;
@@ -40,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        attackManager = GetComponent<AttackManager>();
+        healthManager = GetComponent<HealthManager>();
         Sprite = GetComponent<SpriteRenderer>();
         Application.targetFrameRate = 60;
         rb = GetComponent<Rigidbody2D>();

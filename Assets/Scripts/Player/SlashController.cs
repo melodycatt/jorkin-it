@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class SlashController : MonoBehaviour {
+    public AttackManager attackManager;
+
     public int cooldown = 0;
     public float cooldownLength = 0.4f;
 
@@ -26,6 +28,7 @@ public class SlashController : MonoBehaviour {
 
     void Start() {
         Player = transform.parent.Find("Player");
+        attackManager = Player.GetComponent<AttackManager>();
         Slash = Resources.Load<GameObject>("Prefabs/Player/Slash");
     }
 
@@ -40,6 +43,7 @@ public class SlashController : MonoBehaviour {
         GameObject tempSlash = Instantiate(Slash);
         tempSlash.transform.parent = transform;
         tempSlash.transform.localPosition = new(0, 0);
+        tempSlash.GetComponent<Slash>().attackManager = attackManager;
 
         //hit direction stuff
         if(dir.y != 0) {

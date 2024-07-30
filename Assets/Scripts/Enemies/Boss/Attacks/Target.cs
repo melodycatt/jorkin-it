@@ -68,9 +68,7 @@ public class Target : MonoBehaviour {
         PlayerMovement pMov = Player.GetComponent<PlayerMovement>();
         pMov.rb.simulated = false;
         yield return new WaitForSeconds(0.5f);
-        hMngr.Hurt(0.5f);
-        yield return new WaitForSeconds(0.5f);
-        hMngr.Hurt(0.5f);
+        hMngr.Hurt(1);
         yield return new WaitForSeconds(0.5f);
         hMngr.Hurt(1);
         pMov.rb.simulated = true;

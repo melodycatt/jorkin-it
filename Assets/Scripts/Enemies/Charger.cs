@@ -12,6 +12,13 @@ public class Charger : Basic {
     //self explanatory
     public bool Charging;
 
+    protected override void Update() {
+        base.Update();
+        if (AttackTrigger.OverlapPoint(Player.position)) {
+            attackManager.Attack(Player.GetComponent<HealthManager>());
+        } 
+    }
+
     public override IEnumerator AI()
     {
         if (Charging) {

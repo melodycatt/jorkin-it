@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class AttackManager : MonoBehaviour {
-    public List<Action<HealthManager, float, List<StatusEffect>>> OnAttackFunctions;
+    public List<Action<HealthManager, float, List<StatusEffect>>> OnAttackFunctions = new();
     public float Damage;
-    public float FinalDamage {
+    public string nname;
+    public int FinalDamage {
         get {
             float d = Damage;
             foreach (AttackStatus mod in Modifiers) {
@@ -23,20 +25,20 @@ public class AttackManager : MonoBehaviour {
                     d /= mod.mult;
                 }
             }
-            return Damage;
+            return (int)Damage;
         }
     }
-    public List<AttackStatus> Modifiers;
-    public List<StatusEffect> Effects;
+    public List<AttackStatus> Modifiers = new();
+    public List<StatusEffect> Effects = new();
 
     public void Attack(HealthManager target) {
-        target.Hurt(FinalDamage, Effects);
+        target.Hurt(FinalDamage, Effects, source:nname);
         foreach (Action<HealthManager, float, List<StatusEffect>> function in OnAttackFunctions) {
             function(target, FinalDamage, Effects);
         }
     }
     public void Attack(HealthManager target, float mult) {
-        target.Hurt(FinalDamage * mult, Effects);
+        target.Hurt((int)(FinalDamage * mult), Effects);
         foreach (Action<HealthManager, float, List<StatusEffect>> function in OnAttackFunctions) {
             function(target, FinalDamage * mult, Effects);
         }

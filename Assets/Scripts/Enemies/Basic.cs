@@ -34,7 +34,7 @@ public class Basic : Enemy {
         FollowTrigger.radius = FollowRange;
     }
 
-    void Update() {
+    protected override void Update() {
         //ai stuff, following variable is for when you dont want AI() to trigger again for a bit
         //(usually until the current AI() finishes)
         if (FollowTrigger.OverlapPoint(Player.position)) {

@@ -1,20 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour {
     [SerializeField]
-    private float _maxHealth;
-    public float MaxHealth { get => _maxHealth; private set { _maxHealth = value; } }
+    protected float _maxHealth;
+    public float MaxHealth { get => _maxHealth; protected set { _maxHealth = value; } }
     [SerializeField]
-    private float Health;
+    protected float Health;
 
     public bool Dead;
 
-    public List<Func<float, HealthManager, float>> OnHurtFunctions = new();
-    public List<Func<float, HealthManager, float>> OnHealFunctions = new();
+    public List<Func<int, HealthManager, int>> OnHurtFunctions = new();
+    public List<Func<int, HealthManager, int>> OnHealFunctions = new();
 
     [SerializeField]
     public List<StatusEffect> statuses = new();
@@ -22,13 +24,13 @@ public class HealthManager : MonoBehaviour {
     public AttackManager attackManager;
 
     public float genericIframes;
-    public float genericIframesLength = 0.45f;
+    public float genericIframesLength = 1.45f;
 
     void Start() {
         Health = MaxHealth;
         attackManager = GetComponent<AttackManager>();
         Debug.Log("bb");
-        HealthStatusBuilder.Statifier(this, new DamageTicker(null, 3, 1, false));
+        //HealthStatusBuilder.Statifier(this, new DamageTicker(null, 3, 1, false));
     }
 
     void Update() {
@@ -36,38 +38,42 @@ public class HealthManager : MonoBehaviour {
         if (genericIframes < 0) genericIframes = 0;
     }
 
-    public void Hurt(float damage) {
-        if (genericIframes <= 0) {
-            foreach (Func<float, HealthManager, float> function in OnHurtFunctions) {
+    public virtual void Hurt(int damage, bool ignoreIFrames = false) {
+        if (genericIframes <= 0 || ignoreIFrames) {
+            foreach (Func<int, HealthManager, int> function in OnHurtFunctions) {
                 damage = function(damage, this);
-            }
-            if (damage < 100) {
-                print("'tis but a scratch!");
             }
             genericIframes = genericIframesLength;
             _Hurt(damage);
         }
     }
 
-    public void Heal(float health) {
-        foreach (Func<float, HealthManager, float> function in OnHealFunctions) {
+    public virtual void Heal(int health) {
+        foreach (Func<int, HealthManager, int> function in OnHealFunctions) {
             health = function(health, this);
         }
         _Heal(health);
     }
 
-    public void Hurt(float damage, List<StatusEffect> statuses) {
-        foreach (Func<float, HealthManager, float> function in OnHurtFunctions) {
-            damage = function(damage, this);
+    public virtual void Hurt(int damage, List<StatusEffect> statuses, bool ignoreIFrames = false) {
+        if (genericIframes <= 0 || ignoreIFrames) {
+            foreach (Func<int, HealthManager, int> function in OnHurtFunctions) {
+                damage = function(damage, this);
+            }
+            _Hurt(damage);
         }
-        if (damage < 100) {
-            print("'tis but a scratch!");
+    }
+    public virtual void Hurt(int damage, List<StatusEffect> statuses, string source, bool ignoreIFrames = false) {
+        if (genericIframes <= 0 || ignoreIFrames) {
+            foreach (Func<int, HealthManager, int> function in OnHurtFunctions) {
+                damage = function(damage, this);
+            }
+            _Hurt(damage);
         }
-        _Hurt(damage);
     }
 
-    public void Heal(float health, List<StatusEffect> statuses) {
-        foreach (Func<float, HealthManager, float> function in OnHealFunctions) {
+    public virtual void Heal(int health, List<StatusEffect> statuses) {
+        foreach (Func<int, HealthManager, int> function in OnHealFunctions) {
             health = function(health, this);
         }
         _Heal(health);

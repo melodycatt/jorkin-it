@@ -15,7 +15,7 @@ public abstract class Boss : Enemy {
     public float AttackCooldown;
     public bool Attacking;
 
-    protected void Update() {
+    protected override void Update() {
         if (AttackCooldown <= 0) {
             Attacking = true;
             AttackCooldown = AttackDelay;

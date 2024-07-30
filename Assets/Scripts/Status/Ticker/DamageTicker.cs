@@ -5,10 +5,10 @@ using UnityEngine;
 
 [Serializable]
 public class DamageTicker : TickingEffect {
-    public float damage;
+    public int damage;
     public bool heal;
 
-    public DamageTicker(HealthManager on, float tickDelay, float damage, bool heal): base(on, tickDelay) {
+    public DamageTicker(HealthManager on, float tickDelay, int damage, bool heal): base(on, tickDelay) {
         this.damage = damage;
         this.heal = heal;
     }

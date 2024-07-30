@@ -13,6 +13,8 @@ public abstract class Enemy : MonoBehaviour {
 
     public Transform Player;
     public SpriteRenderer Sprite;
+    public AttackManager attackManager;
+    public HealthManager healthManager;
 
 
     //virtual is a memory thing hard to explain without detail (if you dont know it)
@@ -23,6 +25,12 @@ public abstract class Enemy : MonoBehaviour {
         Health = MaxHealth;
         rb = GetComponent<Rigidbody2D>();
         Sprite = GetComponent<SpriteRenderer>();
+        attackManager = GetComponent<AttackManager>();
+        healthManager = GetComponent<HealthManager>();
+    }
+
+    protected virtual void Update() {
+
     }
 
     //if you want to make another general class like this one which doesnt have its own ai or hurt functionality,

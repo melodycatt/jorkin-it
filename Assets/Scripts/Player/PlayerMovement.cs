@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool airJump;
 
+    public bool recoil;
+
     private float _health;
     public float Health {
         get => _health;
@@ -56,17 +58,21 @@ public class PlayerMovement : MonoBehaviour
     {
         //set grounded and get keys
         Grounded = Physics2D.Raycast(transform.position, Vector2.down, Sprite.bounds.size.y / 2 + 0.1f, GroundLayer).collider != null;
-        Tuple<int, Vector2Int> movement = GetMovement(); 
+        if (!recoil) {
+            Tuple<int, Vector2Int> movement = GetMovement(); 
 
-        //set facing direction
-        Facing.y = movement.Item2.y;
-        if (movement.Item2.x != 0) Facing.x = movement.Item2.x;
+            //set facing direction
+            Facing.y = movement.Item2.y;
+            if (movement.Item2.x != 0) Facing.x = movement.Item2.x;
 
-        //horizontal movment
-        Vector2 velocity = Vector2.zero;
-        velocity.x = Speed * movement.Item1;
-        velocity.y = rb.velocity.y;
-        rb.velocity = velocity;
+            //horizontal movment
+            Vector2 velocity = Vector2.zero;
+            velocity.x = Speed * movement.Item1;
+            velocity.y = rb.velocity.y;
+            rb.velocity = velocity;
+        } else if (rb.velocity.x == 0) {
+            recoil = false;
+        }
 
         // if you touched the ground (i honestly have no idea at all why its checking for the jump key
         // but it breaks if you remove it)

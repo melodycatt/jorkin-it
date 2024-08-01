@@ -15,7 +15,7 @@ public class PlayerHM : HealthManager {
         Health = MaxHealth;
         attackManager = GetComponent<AttackManager>();
         Debug.Log("bb");
-        HealthStatusBuilder.Statifier(this, new DamageTicker(null, 3, 1, false));
+        //HealthStatusBuilder.Statifier(this, new DamageTicker(null, 3, 1, false));
         hearts = Camera.main.transform.Find("UI").Find("HUD").Find("HEALTH").GetComponentsInChildren<Transform>().Where((x) => x.gameObject.name == "Shard").ToList();
     }
 

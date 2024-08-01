@@ -26,9 +26,6 @@ public class Slash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //move slightly. ill probs remove this maybe
-        transform.position += transform.rotation * new Vector3(0.01f, 0);
-
         //check for hits. TODO: keep track of what enemies are hit so you dont hit them a gazillion times in one slash
         ContactFilter2D filter = new();
         filter.SetLayerMask(EnemyLayer);
@@ -40,7 +37,8 @@ public class Slash : MonoBehaviour
         if (nhits > 0 && !hit) {
             //recoil. this doesnt work, and i dont know how to make it work
             hit = true;
-            Player.GetComponent<PlayerMovement>().rb.velocity -= (Vector2)(transform.rotation * new Vector3(Player.GetComponent<PlayerMovement>().Speed, 0));
+            Player.GetComponent<PlayerMovement>().recoil = true;
+            Player.GetComponent<PlayerMovement>().rb.velocity = (Vector2)(transform.rotation * new Vector3(-Player.GetComponent<PlayerMovement>().Speed, Player.GetComponent<PlayerMovement>().rb.velocity.y));
         }
     }
 

@@ -7,7 +7,7 @@ using UnityEngine;
 public class AttackManager : MonoBehaviour {
     public List<Action<HealthManager, float, List<StatusEffect>>> OnAttackFunctions = new();
     public float Damage;
-    public string nname;
+    public string nname = "null";
     public int FinalDamage {
         get {
             float d = Damage;
@@ -30,6 +30,12 @@ public class AttackManager : MonoBehaviour {
     }
     public List<AttackStatus> Modifiers = new();
     public List<StatusEffect> Effects = new();
+
+    void Start() {
+        Modifiers = new();
+        Effects = new();
+        print(FinalDamage);
+    }
 
     public void Attack(HealthManager target) {
         target.Hurt(FinalDamage, Effects, source:nname);

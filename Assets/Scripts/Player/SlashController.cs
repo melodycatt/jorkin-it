@@ -9,6 +9,8 @@ public class SlashController : MonoBehaviour {
 
     public int cooldown = 0;
     public float cooldownLength = 0.4f;
+    public float recoilScale = 8;
+    public float slashLifetime = 0.15f;
 
     //similar dumbness as before
     public _SlashKeybinds<MouseButton> KnifeKeybinds = new _SlashKeybinds<MouseButton>()
@@ -43,6 +45,8 @@ public class SlashController : MonoBehaviour {
         GameObject tempSlash = Instantiate(Slash);
         tempSlash.transform.parent = transform;
         tempSlash.transform.localPosition = new(0, 0);
+        tempSlash.GetComponent<Slash>().recoilScale = recoilScale;
+        tempSlash.GetComponent<Slash>().lifetime = slashLifetime;
         tempSlash.GetComponent<Slash>().attackManager = attackManager;
 
         //hit direction stuff

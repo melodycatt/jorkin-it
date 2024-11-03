@@ -9,6 +9,7 @@ using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     //do i really have to comment all these fields? figure it out 
+    new public Collider2D collider;
     public SpriteRenderer Sprite;
     public HealthManager healthManager;
     public AttackManager attackManager;
@@ -44,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        collider = GetComponent<Collider2D>();
         attackManager = GetComponent<AttackManager>();
         healthManager = GetComponent<HealthManager>();
         Sprite = GetComponent<SpriteRenderer>();
@@ -57,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //set grounded and get keys
-        Grounded = Physics2D.Raycast(transform.position, Vector2.down, Sprite.bounds.size.y / 2 + 0.1f, GroundLayer).collider != null;
+        Grounded = Physics2D.Raycast(transform.position, Vector2.down, collider.bounds.size.y / 2 + 0.1f, GroundLayer).collider != null;
         if (!recoil) {
             Tuple<int, Vector2Int> movement = GetMovement(); 
 

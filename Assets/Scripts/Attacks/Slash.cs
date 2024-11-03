@@ -10,6 +10,9 @@ public class Slash : MonoBehaviour
     public LayerMask EnemyLayer;
     public Transform Player;
 
+    public float lifetime = 0.15f;
+    public float recoilScale = 8;
+
     //has this hit anything
     public bool hit;
 
@@ -38,14 +41,12 @@ public class Slash : MonoBehaviour
             //recoil. this doesnt work, and i dont know how to make it work
             hit = true;
             Player.GetComponent<PlayerMovement>().recoil = true;
-            Player.GetComponent<PlayerMovement>().rb.velocity = (Vector2)(transform.rotation * new Vector3(-Player.GetComponent<PlayerMovement>().Speed, Player.GetComponent<PlayerMovement>().rb.velocity.y));
+            Player.GetComponent<PlayerMovement>().rb.velocity = transform.rotation * new Vector2(-recoilScale, 0);
         }
     }
 
     IEnumerator Die() {
-        for (int i = 0; i < 20; i++) {
-            yield return null;
-        }
+        yield return new WaitForSeconds(lifetime);
         Destroy(gameObject);
     }
 }

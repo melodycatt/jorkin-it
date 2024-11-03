@@ -60,6 +60,7 @@ public class HealthManager : MonoBehaviour {
             foreach (Func<int, HealthManager, int> function in OnHurtFunctions) {
                 damage = function(damage, this);
             }
+            genericIframes = genericIframesLength;
             _Hurt(damage);
         }
     }
@@ -68,6 +69,7 @@ public class HealthManager : MonoBehaviour {
             foreach (Func<int, HealthManager, int> function in OnHurtFunctions) {
                 damage = function(damage, this);
             }
+            genericIframes = genericIframesLength;
             _Hurt(damage);
         }
     }

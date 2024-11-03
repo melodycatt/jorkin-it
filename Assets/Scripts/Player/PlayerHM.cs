@@ -10,6 +10,7 @@ public class PlayerHM : HealthManager {
     public List<Transform> hearts;
     public List<Transform> shatteredHearts;
 
+    public List<Trinket> trinkets;
 
     void Start() {
         Health = MaxHealth;

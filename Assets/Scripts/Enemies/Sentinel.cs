@@ -13,6 +13,7 @@ public class Sentinel : Boss {
     //knife is actually a fireball and no i wont change that its funnt
     public GameObject Knife;
     public GameObject Target;
+    public ParticleSystem Particles;
 
     public int nKnives = 3;
     public float knifeDelay = 0.75f;
@@ -24,6 +25,8 @@ public class Sentinel : Boss {
         Knife = Resources.Load<GameObject>("Prefabs/Boss/Knife");
         Target = Resources.Load<GameObject>("Prefabs/Boss/Target");
         Sprite = GetComponentInChildren<SpriteRenderer>();
+        Particles = GetComponentInChildren<ParticleSystem>();
+        healthManager.OnHurtFunctions.Add((int d, HealthManager on) => {Particles.Play(); return d;});
     }
 
     public override IEnumerator AI()

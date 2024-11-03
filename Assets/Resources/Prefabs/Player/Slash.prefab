@@ -133,7 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba8e61ea6a8b40cdb32758ba00a4a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackManager: {fileID: 0}
   collider: {fileID: 0}
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  Player: {fileID: 0}
+  hit: 0
